@@ -1,17 +1,24 @@
 <template>
-  <BaseOverlay :isOpen="popupStore.getActivePopup.value.popupName === PopupName.Test" />
   <Transition  name="slide">
   <div class="base-popup-wrap" v-if="popupStore.getActivePopup.value.popupName === PopupName.Test" @click.self="popupStore.closePopup()">
-    <div   :class="['base-popup']">
-      <div class="base-popup__header">
-        <slot name="header"/>
-      </div>
-      <div class="base-popup__content">
-        <slot name="content"/>
-      </div>
-      <div class="base-popup__footer">
-        <slot name="footer"/>
-      </div>
+    <div  :class="['base-popup']">
+      {{isLoading}}
+      <template v-if="isLoading">
+        <AppLoader/>
+      </template>
+
+      <template v-else>
+        <div class="base-popup__header">
+          <slot name="header"/>
+        </div>
+        <div class="base-popup__content">
+          <slot name="content"/>
+        </div>
+        <div class="base-popup__footer">
+          <slot name="footer"/>
+        </div>
+      </template>
+
     </div>
   </div>
   </Transition>
@@ -20,7 +27,11 @@
 <script setup lang="ts">
 import {usePopupStore} from "~/composables/popupStore/usePopupStore";
 import {PopupName} from "~/composables/popupStore/types";
+import AppLoader from "~/components/AppLoader.vue";
 
+const props = defineProps<{
+  isLoading?: boolean;
+}>()
 const popupStore = usePopupStore()
 </script>
 
@@ -38,22 +49,6 @@ const popupStore = usePopupStore()
 
   @media (max-width: 743px) {
     align-items: flex-end;
-  }
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  @media (max-width: 743px) {
-    transform: translateY(0);
-    transition: all 0.3s ease;
-  }
-
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  @media (max-width: 743px) {
-    transform: translateY(100%);
   }
 }
 

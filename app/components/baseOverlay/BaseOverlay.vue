@@ -1,16 +1,10 @@
 <template>
-  <Transition  name="fade">
-    <div class="base-overlay" v-if="isOpen">
+    <div class="base-overlay">
       <slot />
     </div>
-  </Transition>
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  isOpen: boolean;
-}>();
-
 </script>
 
 <style lang="scss" scoped>
@@ -26,16 +20,5 @@ defineProps<{
   justify-content: center;
   align-items: center;
   z-index: 1000;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

@@ -1,9 +1,56 @@
 <template>
-<BasePopup>
+<BasePopup :isLoading="isLoading">
   <template #content>
     <div class="test-popup">
-      <h2>This is a Test Popup</h2>
-      <p>This popup is used for testing purposes.</p>
+      <h2 class="popup-title">Отправить заявку</h2>
+
+      <p class="popup-description">
+        Заполните форму ниже, чтобы связаться с нашей командой. Мы ответим вам в течение 24 часов.
+        Пожалуйста, укажите корректные данные, чтобы мы могли с вами связаться.
+      </p>
+
+      <form class="popup-form">
+        <label>
+          Имя
+          <input type="text" placeholder="Введите ваше имя" />
+        </label>
+
+        <label>
+          Email
+          <input type="email" placeholder="Введите ваш email" />
+        </label>
+
+        <label>
+          Телефон
+          <input type="tel" placeholder="+7 (___) ___-__-__" />
+        </label>
+
+        <label>
+          Сообщение
+          <textarea rows="6" placeholder="Напишите ваше сообщение..."></textarea>
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" />
+          <span>Я согласен с обработкой персональных данных</span>
+        </label>
+
+        <button type="submit" class="submit-btn">Отправить</button>
+      </form>
+
+      <div class="popup-footer-text">
+        <h3>Почему стоит выбрать нас?</h3>
+        <p>
+          Мы ценим своих клиентов и стремимся предоставлять лучший сервис. Наша команда
+          специалистов поможет вам разобраться с любыми вопросами и предложит индивидуальное решение.
+        </p>
+
+        <p>
+          Более 10 000 довольных клиентов уже воспользовались нашими услугами.
+          Присоединяйтесь к ним прямо сейчас!
+        </p>
+      </div>
+
     </div>
   </template>
 </BasePopup>
@@ -11,6 +58,15 @@
 </template>
 
 <script setup lang="ts">
+
+const isLoading = ref(true);
+
+onMounted(() => {
+  isLoading.value = true
+  setTimeout(() => {
+    isLoading.value = false
+  }, 2000)
+})
 
 </script>
 
