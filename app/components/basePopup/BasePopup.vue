@@ -1,25 +1,31 @@
 <template>
   <Transition  name="slide">
   <div class="base-popup-wrap" v-if="popupStore.getActivePopup.value.popupName === PopupName.Test" @click.self="popupStore.closePopup()">
-    <div  :class="['base-popup']">
-      {{isLoading}}
-      <template v-if="isLoading">
-        <AppLoader/>
-      </template>
 
-      <template v-else>
-        <div class="base-popup__header">
-          <slot name="header"/>
-        </div>
-        <div class="base-popup__content">
-          <slot name="content"/>
-        </div>
-        <div class="base-popup__footer">
-          <slot name="footer"/>
-        </div>
-      </template>
+      <div  :class="['base-popup']">
+        <SmoothHeightTransition>
 
-    </div>
+            <template v-if="isLoading">
+              <AppLoader/>
+            </template>
+
+            <template v-else>
+              <div class="base-popup__header">
+                <slot name="header"/>
+              </div>
+              <div class="base-popup__content">
+                <slot name="content"/>
+              </div>
+              <div class="base-popup__footer">
+                <slot name="footer"/>
+              </div>
+            </template>
+
+
+
+        </SmoothHeightTransition>
+      </div>
+
   </div>
   </Transition>
 </template>
