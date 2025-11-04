@@ -51,10 +51,10 @@ const popupStore = usePopupStore()
   z-index: 9999999;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 
-  @media (max-width: 743px) {
-    align-items: flex-end;
+  @media (min-width: 743px) {
+    align-items: center;
   }
 }
 
@@ -62,5 +62,10 @@ const popupStore = usePopupStore()
   background: #fff;
   min-height: 180px;
   width: 100%;
+
+  @media (min-width: 743px) {
+    min-width: 320px;
+    max-width: 768px;
+  }
 }
 </style>
