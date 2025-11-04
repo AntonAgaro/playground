@@ -38,7 +38,7 @@
         <button type="submit" class="submit-btn">Отправить</button>
       </form>
 
-      <div class="popup-footer-text">
+      <div class="popup-footer-text" ref="textContainer">
         <h3>Почему стоит выбрать нас?</h3>
         <p>
           Мы ценим своих клиентов и стремимся предоставлять лучший сервис. Наша команда
@@ -99,17 +99,37 @@
 
 <script setup lang="ts">
 
-const isLoading = ref(true);
+const isLoading = ref(false);
+const textContainer = ref<HTMLElement | null>(null)
 
-onMounted(() => {
-  isLoading.value = true
-  setTimeout(() => {
-    isLoading.value = false
-  }, 2000)
-})
+// onMounted(() => {
+//   isLoading.value = true
+//   setTimeout(() => {
+//     isLoading.value = false
+//     nextTick(() => {
+//       if (textContainer.value) {
+//         setTimeout(() => {
+//           textContainer.value.innerHTML = ` `
+//
+//           setTimeout(() => {
+//             textContainer.value.innerHTML = ` <p>
+//           Мы ценим своих клиентов и стремимся предоставлять лучший сервис. Наша команда
+//           специалистов поможет вам разобраться с любыми вопросами и предложит индивидуальное решение.
+//         </p>`
+//           }, 2000)
+//         }, 2000)
+//       }
+//     })
+//
+//   }, 2000)
+//
+//
+// })
 
 </script>
 
 <style scoped>
-
+input {
+  font-size: 16px;
+}
 </style>

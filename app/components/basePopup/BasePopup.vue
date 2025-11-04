@@ -1,8 +1,11 @@
 <template>
   <Transition  name="slide">
-  <div class="base-popup-wrap" v-if="popupStore.getActivePopup.value.popupName === PopupName.Test" @click.self="popupStore.closePopup()">
+  <div
+      class="base-popup-wrap"
+       v-if="popupStore.getActivePopup.value.popupName === PopupName.Test" @click.self="popupStore.closePopup()"
+  >
 
-      <div  :class="['base-popup']">
+      <div  :class="['base-popup']" >
         <SmoothHeightTransition>
 
             <template v-if="isLoading">
@@ -13,7 +16,7 @@
               <div class="base-popup__header">
                 <slot name="header"/>
               </div>
-              <div class="base-popup__content">
+              <div class="base-popup__content" :style="{ paddingBottom: mobileKeyboardHeight + 'px' }">
                 <slot name="content"/>
               </div>
               <div class="base-popup__footer">
@@ -34,11 +37,17 @@
 import {usePopupStore} from "~/composables/popupStore/usePopupStore";
 import {PopupName} from "~/composables/popupStore/types";
 import AppLoader from "~/components/AppLoader.vue";
+import useVisualViewportDiff from "~/composables/useVisualViewportDiff";
 
 const props = defineProps<{
   isLoading?: boolean;
 }>()
+
 const popupStore = usePopupStore()
+
+//TODO - только на мобилке (а может только на ios)
+const mobileKeyboardHeight = useVisualViewportDiff();
+
 </script>
 
 <style lang="scss" scoped>
