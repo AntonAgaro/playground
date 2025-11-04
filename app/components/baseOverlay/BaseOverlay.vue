@@ -5,6 +5,43 @@
 </template>
 
 <script setup lang="ts">
+// когда оверлей монтируется — блокируем скролл
+let scrollY = 0
+
+onMounted(() => {
+lockScroll()
+})
+
+// когда оверлей удаляется — возвращаем всё обратно
+onBeforeUnmount(() => {
+unlockScroll()
+})
+
+function lockScroll() {
+  // сохраняем текущую позицию
+  scrollY = window.scrollY
+
+  // фиксируем body на месте
+  document.body.style.position = 'fixed'
+  document.body.style.top = `-${scrollY}px`
+  document.body.style.left = '0'
+  document.body.style.right = '0'
+  document.body.style.width = '100%'
+  document.body.style.overflow = 'hidden'
+}
+
+function unlockScroll() {
+  // убираем фиксацию
+  document.body.style.position = ''
+  document.body.style.top = ''
+  document.body.style.left = ''
+  document.body.style.right = ''
+  document.body.style.width = ''
+  document.body.style.overflow = ''
+
+  // восстанавливаем скролл
+  window.scrollTo(0, scrollY)
+}
 </script>
 
 <style lang="scss" scoped>
